@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 const Google = () => {
 	const [localidad, setLocalidad] = useState( `` )
 	const CREDENTAIL = `AIzaSyABgPY5wxzg0FK0goBCQfGkkLoN2Vsvz3I`
 
 	const handleClickLocalidad = async () => {
-		const formatLocation = ( {lat, lng} ) => {
+		const formatLocation = ( {lat, lng}: {lat: number, lng: number} ) => {
 			return `${lat}, ${lng}`
 		}
 		const geoLocation = await fetch( `https://www.googleapis.com/geolocation/v1/geolocate?key=${CREDENTAIL}`, {
