@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { NextSeo } from "next-seo"
+import Header from "./Header"
 
 interface Props {
 	title?: string
@@ -21,7 +22,8 @@ const Layout: React.FunctionComponent<Props> = ( { children, title } ) => {
 				description='This is a Next-App 😊'
 				canonical="http://localhost:3000"
 			/>
-			<main>
+			<Header/>
+			<main className='px-2'>
 				{children}
 			</main>
 		</div>
