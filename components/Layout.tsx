@@ -3,7 +3,7 @@ import { NextSeo } from "next-seo"
 import Header from "./Header"
 
 interface Props {
-	title?: string
+	title: string
 }
 
 const Layout: React.FunctionComponent<Props> = ( { children, title } ) => {
@@ -23,7 +23,8 @@ const Layout: React.FunctionComponent<Props> = ( { children, title } ) => {
 				canonical="http://localhost:3000"
 			/>
 			<Header/>
-			<main className='px-2'>
+			<main className='relative px-2'>
+				<h1 style={{zIndex: -10}} className='absolute left-0 right-0 pt-12 mx-auto text-2xl text-center md:text-4xl'>{title}</h1>
 				{children}
 			</main>
 		</div>

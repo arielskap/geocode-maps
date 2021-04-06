@@ -4,19 +4,10 @@ import { useEffect, useState } from "react"
 
 let WATCH_ID = NaN
 
-const ApiGeo: React.FC = () => {
+const BigDataCloud: React.FC = () => {
 	const [localidades, setLocalidades] = useState<string[]>( [] )
-	const CREDENTAIL = `AIzaSyABgPY5wxzg0FK0goBCQfGkkLoN2Vsvz3I`
-
-	const formatLocation = ( {latitude, longitude}: {latitude: number, longitude: number} ) => {
-		return `${latitude}, ${longitude}`
-	}
-
 	const geoSuccess = async ( position: GeolocationPosition ) => {
-		const location = formatLocation( position.coords )
-		const result = await fetch( `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location}&key=${CREDENTAIL}`, {
-			method: `POST`
-		} ).then( ( result ) => {
+		const result = await fetch( `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=es` ).then( ( result ) => {
 			return result.json()
 		} ).catch( ( e ) => {
 			console.log( e )
@@ -25,7 +16,7 @@ const ApiGeo: React.FC = () => {
 		} )
 
 		console.log( result )
-		setLocalidades( ( prevState ) => [...prevState, result.results[0].formatted_address] )
+		setLocalidades( ( prevState ) => [...prevState, `Pais: ${result.countryName},Ciudad: ${result.city}, Localidad: ${result.locality}`] )
 	}
 
 	const geoError = () => {
@@ -54,8 +45,14 @@ const ApiGeo: React.FC = () => {
 		return navigator.geolocation.clearWatch( WATCH_ID )
 	}, [localidades] )
 
+	useEffect( () => {
+		if ( `geolocation` in navigator ) {
+			true
+		}
+	}, [] )
+
 	return (
-		<Layout title="Api google y nativo">
+		<Layout title="Big Data Cloud Api GeoCode">
 			<div className='flex flex-col items-center justify-center h-screen'>
 				<button className='px-2 py-1 mt-4 text-white bg-blue-600 rounded hover:bg-blue-800' type='button' onClick={handleClickLocalidad}>Obtener posicion actual</button>
 				{localidades.map( ( localidad, i ) => {
@@ -68,4 +65,4 @@ const ApiGeo: React.FC = () => {
 	)
 }
 
-export default ApiGeo
+export default BigDataCloud
