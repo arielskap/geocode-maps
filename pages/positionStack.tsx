@@ -51,7 +51,7 @@ const PositioNStack: React.FC = () => {
 			if ( result.state == `granted` ) {
 				WATCH_ID = navigator.geolocation.watchPosition( geoSuccess, geoError, GEO_OPTIONS )
 			} else if ( result.state == `prompt` ) {
-				navigator.geolocation.getCurrentPosition( geoSuccess, geoError, GEO_OPTIONS )
+				console.log( `preguntando` )
 			} else if ( result.state == `denied` ) {
 				if ( button ) {
 					button.disabled = true
@@ -62,6 +62,9 @@ const PositioNStack: React.FC = () => {
 			}
 		} )
 		function report( state: string ) {
+			if ( state === `granted` ) {
+				navigator.geolocation.getCurrentPosition( geoSuccess, geoError, GEO_OPTIONS )
+			}
 			console.log( `Permission ` + state )
 		}
 	}, [] )
