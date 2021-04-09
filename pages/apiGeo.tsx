@@ -29,7 +29,7 @@ const ApiGeo: React.FC = () => {
 	}
 
 	const geoError = () => {
-		alert( `No se pudo obtener la posicion` )
+		alert( `Active la geolocalización y recargue la pagina para continuar...` )
 	}
 
 	const handleClickLocalidad = () => {
