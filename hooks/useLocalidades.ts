@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-let WATCH_ID = NaN
 const GEO_OPTIONS = {
 	enableHighAccuracy: true,
 	maximumAge: 0,
@@ -31,18 +30,11 @@ const useLocalidades = ( { parseUrl }: { parseUrl: ( position: GeolocationPositi
 
 	const handleClickLocalidad = () => {
 		if ( `geolocation` in navigator ) {
-			WATCH_ID = navigator.geolocation.watchPosition( geoSuccess, geoError, GEO_OPTIONS )
+			navigator.geolocation.getCurrentPosition( geoSuccess, geoError, GEO_OPTIONS )
 		} else {
 			alert( `Geolocalizacion no esta disponible` )
 		}
 	}
-
-	useEffect( () => {
-		if ( localidades.length > 3 ) {
-			navigator.geolocation.clearWatch( WATCH_ID )
-		}
-		return navigator.geolocation.clearWatch( WATCH_ID )
-	}, [localidades] )
 
 	return {
 		localidades, setLocalidades, handleClickLocalidad, fetchLocalidadResult
