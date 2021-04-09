@@ -10,7 +10,7 @@ const useGeolocation = () => {
 			if ( result.state == `granted` ) {
 				setGeolocation( true )
 			} else if ( result.state == `prompt` ) {
-				console.log( `preguntando` )
+				setGeolocation( true )
 			} else if ( result.state == `denied` ) {
 				setGeolocation( false )
 			}

@@ -21,7 +21,7 @@ const PositioNStack: React.FC = () => {
 	return (
 		<Layout title="Position Stack Api GeoCode">
 			<div className='flex flex-col items-center justify-center h-screen'>
-				<button disabled={!geolocation} className='px-2 py-1 mt-4 text-white bg-blue-600 rounded hover:bg-blue-800' type='button' onClick={handleClickLocalidad}>Obtener posicion actual</button>
+				<button disabled={!geolocation} className='px-2 py-1 mt-4 text-white bg-blue-600 rounded disabled:bg-gray-700 hover:bg-blue-800 disabled:cursor-not-allowed' type='button' onClick={handleClickLocalidad}>Obtener posicion actual</button>
 				{localidades && localidades.map( ( localidad, i ) => {
 					return (
 						<p key={`localidad-${i}`}>Localidad {i + 1}: {localidad}</p>
